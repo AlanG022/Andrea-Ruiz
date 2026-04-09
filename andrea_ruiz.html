@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Ruiz – Belleza & Bienestar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5ede4;
+    --blush: #e8c4b0;
+    --rose: #c97d5a;
+    --deep-rose: #a05c3e;
+    --taupe: #b8a89a;
+    --dark: #2a1f1a;
+    --mid: #6b4c3b;
+    --light-bg: #faf5f0;
+    --card-bg: #fff9f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--light-bg);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5%;
+    background: rgba(250,245,240,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(184,168,154,0.3);
+    animation: slideDown .6s ease forwards;
+  }
+
+  @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: .7rem;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
+    color: var(--deep-rose); letter-spacing: .05em; text-decoration: none;
+  }
+
+  .nav-logo svg { width: 36px; height: 36px; }
+
+  nav ul {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  nav ul a {
+    font-size: .8rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none; position: relative; padding-bottom: 2px;
+    transition: color .3s;
+  }
+
+  nav ul a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: var(--rose); transform: scaleX(0); transition: transform .3s;
+  }
+
+  nav ul a:hover { color: var(--rose); }
+  nav ul a:hover::after { transform: scaleX(1); }
+
+  .nav-cta {
+    font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--card-bg); background: var(--rose); border: none; padding: .65rem 1.5rem;
+    cursor: pointer; transition: background .3s; text-decoration: none;
+  }
+
+  .nav-cta:hover { background: var(--deep-rose); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative; overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 5% 6rem 8%;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: .7rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 1.5rem;
+    animation: fadeUp .8s .2s both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300; line-height: 1.05; color: var(--dark);
+    margin-bottom: 1.5rem;
+    animation: fadeUp .8s .4s both;
+  }
+
+  .hero-title em { font-style: italic; color: var(--rose); }
+
+  .hero-sub {
+    font-size: .9rem; font-weight: 300; line-height: 1.9;
+    color: var(--mid); max-width: 380px; margin-bottom: 2.5rem;
+    animation: fadeUp .8s .6s both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp .8s .8s both;
+  }
+
+  .btn-primary {
+    display: inline-block; padding: .9rem 2.2rem;
+    background: var(--rose); color: #fff;
+    font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    text-decoration: none; transition: background .3s, transform .2s;
+  }
+
+  .btn-primary:hover { background: var(--deep-rose); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-block; padding: .9rem 2.2rem;
+    border: 1px solid var(--rose); color: var(--rose);
+    font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+    text-decoration: none; transition: all .3s;
+  }
+
+  .btn-outline:hover { background: var(--rose); color: #fff; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    animation: fadeIn 1s .3s both;
+  }
+
+  .hero-right img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: saturate(.9) brightness(.97);
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--light-bg) 0%, transparent 40%);
+  }
+
+  .hero-badge {
+    position: absolute; bottom: 3rem; left: -2rem;
+    background: var(--cream); border: 1px solid var(--blush);
+    padding: 1.2rem 1.8rem; max-width: 220px;
+    animation: fadeUp .8s 1s both; z-index: 3;
+  }
+
+  .hero-badge .quote {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.05rem; line-height: 1.5; color: var(--deep-rose);
+  }
+
+  .hero-badge .author {
+    font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--taupe); margin-top: .5rem;
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 7rem 8%; }
+
+  .section-label {
+    font-size: .65rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase;
+    color: var(--rose); margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 300;
+    line-height: 1.1; color: var(--dark); margin-bottom: 1.5rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--rose); }
+
+  /* ── SERVICIOS HAIR ── */
+  .services-hair {
+    background: var(--dark);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+
+  .services-hair .section-label { color: var(--blush); }
+  .services-hair .section-title { color: var(--cream); }
+  .services-hair .section-title em { color: var(--blush); }
+
+  .services-hair p {
+    font-size: .9rem; font-weight: 300; line-height: 1.9;
+    color: var(--taupe); margin-bottom: 2.5rem;
+  }
+
+  .hair-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+
+  .hair-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(232,196,176,.15);
+    padding: 1.5rem; transition: border-color .3s, background .3s;
+    cursor: default;
+  }
+
+  .hair-card:hover {
+    background: rgba(232,196,176,.08); border-color: rgba(232,196,176,.4);
+  }
+
+  .hair-card .icon { font-size: 1.5rem; margin-bottom: .8rem; }
+
+  .hair-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400;
+    color: var(--cream); margin-bottom: .4rem;
+  }
+
+  .hair-card p {
+    font-size: .75rem; color: var(--taupe); line-height: 1.7;
+    margin-bottom: 0;
+  }
+
+  .hair-visual {
+    position: relative; height: 520px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .hair-visual img {
+    width: 100%; height: 100%; object-fit: cover;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  }
+
+  /* ── DEPILACION ── */
+  .depilacion { background: var(--cream); }
+
+  .depilacion-inner {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start;
+  }
+
+  .price-table { margin-top: 1rem; }
+
+  .price-group { margin-bottom: 2.5rem; }
+
+  .price-group-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600;
+    color: var(--rose); margin-bottom: 1rem; letter-spacing: .02em;
+  }
+
+  .price-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: .8rem 0; border-bottom: 1px dashed var(--blush);
+    font-size: .85rem; color: var(--mid);
+  }
+
+  .price-row span:last-child {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    font-weight: 600; color: var(--deep-rose);
+  }
+
+  .depilacion-right { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .dep-imgs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+
+  .dep-img {
+    aspect-ratio: 3/4; overflow: hidden; position: relative;
+  }
+
+  .dep-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s;
+  }
+
+  .dep-img:hover img { transform: scale(1.04); }
+
+  .dep-note {
+    background: var(--rose); color: var(--cream);
+    padding: 1.5rem 2rem; font-size: .85rem; line-height: 1.8;
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem;
+  }
+
+  /* ── MASAJES ── */
+  .masajes {
+    background: var(--light-bg);
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: center;
+  }
+
+  .masajes-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: .8rem;
+    position: relative;
+  }
+
+  .masajes-visual .big {
+    grid-column: 1 / -1; aspect-ratio: 16/7; overflow: hidden;
+  }
+
+  .masajes-visual .small { aspect-ratio: 1; overflow: hidden; }
+
+  .masajes-visual img {
+    width: 100%; height: 100%; object-fit: cover; transition: transform .5s;
+    border-radius: 50%;
+  }
+
+  .masajes-visual .big img { border-radius: 0; }
+
+  .masajes-visual .small:hover img { transform: scale(1.06); }
+
+  .masajes-list { margin: 2rem 0; }
+
+  .masaje-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0; border-bottom: 1px solid rgba(184,168,154,.25);
+  }
+
+  .masaje-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--rose); flex-shrink: 0;
+  }
+
+  .masaje-item span {
+    font-size: .9rem; font-weight: 400; color: var(--mid); letter-spacing: .03em;
+  }
+
+  .masajes-cta {
+    font-size: .85rem; font-weight: 300; color: var(--mid); line-height: 1.9;
+    margin-bottom: 2rem; font-style: italic;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+  }
+
+  /* ── ABOUT / INSTAGRAM ── */
+  .about {
+    background: var(--cream);
+    text-align: center;
+    padding: 7rem 20%;
+  }
+
+  .about-logo {
+    width: 90px; margin: 0 auto 2rem;
+    opacity: .85;
+  }
+
+  .about p {
+    font-size: .9rem; font-weight: 300; color: var(--mid); line-height: 2;
+    margin-bottom: 1.5rem;
+  }
+
+  .insta-link {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--rose); text-decoration: none; border-bottom: 1px solid var(--blush);
+    padding-bottom: 2px; transition: color .3s;
+  }
+
+  .insta-link:hover { color: var(--deep-rose); }
+
+  /* ── CONTACTO ── */
+  .contacto {
+    background: var(--dark);
+    text-align: center;
+    padding: 7rem 8%;
+  }
+
+  .contacto .section-label { color: var(--blush); }
+  .contacto .section-title { color: var(--cream); text-align: center; }
+  .contacto .section-title em { color: var(--blush); }
+
+  .contacto > p {
+    font-size: .9rem; color: var(--taupe); max-width: 500px; margin: 0 auto 3rem;
+    line-height: 1.9;
+  }
+
+  .contact-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 700px;
+    margin: 0 auto 3rem;
+  }
+
+  .contact-card {
+    border: 1px solid rgba(232,196,176,.2);
+    padding: 2rem 1.5rem; text-align: center; transition: border-color .3s;
+  }
+
+  .contact-card:hover { border-color: rgba(232,196,176,.5); }
+
+  .contact-card .icon { font-size: 1.5rem; margin-bottom: 1rem; }
+
+  .contact-card h4 {
+    font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--blush); margin-bottom: .4rem;
+  }
+
+  .contact-card p { font-size: .85rem; color: var(--taupe); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); border-top: 1px solid rgba(232,196,176,.12);
+    padding: 2rem 8%; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  footer p { font-size: .72rem; color: var(--taupe); letter-spacing: .05em; }
+
+  footer a { color: var(--blush); text-decoration: none; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 55vw; }
+    .hero-overlay { background: linear-gradient(to bottom, var(--light-bg) 0%, transparent 30%); }
+    .services-hair, .depilacion-inner, .masajes { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hair-visual { height: 300px; }
+    .about { padding: 5rem 8%; }
+    .contact-cards { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    section { padding: 5rem 6%; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-left { padding: 3rem 6% 2rem; }
+    .dep-imgs { grid-template-columns: 1fr; }
+    .hair-cards { grid-template-columns: 1fr; }
+  }
+
+  /* decorative flourish */
+  .flourish {
+    width: 60px; height: 1px; background: var(--blush); display: inline-block; margin: 1.5rem 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <!-- Inline SVG logo (butterfly / Andrea Reborn) -->
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="30" r="28" stroke="#c97d5a" stroke-width="1.2"/>
+      <!-- butterfly wing left -->
+      <path d="M30 30 C20 18, 8 20, 12 30 C8 40, 20 42, 30 30Z" fill="none" stroke="#c97d5a" stroke-width="1.2"/>
+      <!-- butterfly wing right -->
+      <path d="M30 30 C40 18, 52 20, 48 30 C52 40, 40 42, 30 30Z" fill="none" stroke="#e8c4b0" stroke-width="1.2"/>
+      <!-- body -->
+      <path d="M30 22 C29 26 29 34 30 38" stroke="#c97d5a" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- small flowers -->
+      <circle cx="42" cy="18" r="2.5" fill="#e8c4b0"/>
+      <circle cx="46" cy="15" r="1.5" fill="#c97d5a"/>
+      <circle cx="39" cy="15" r="1.5" fill="#c97d5a"/>
+    </svg>
+    Andrea Ruiz 
+  </a>
+  <ul>
+    <li><a href="#hair">Cabellos</a></li>
+    <li><a href="#depilacion">Depilación</a></li>
+    <li><a href="#masajes">Masajes</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/+5491131363230" target="_blank" class="nav-cta">Reservar turno</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Andrea Ruiz · Belleza & Bienestar</p>
+    <h1 class="hero-title">
+      Tu mejor<br>versión<br><em>te espera.</em>
+    </h1>
+    <p class="hero-sub">Servicios exclusivos de peluquería, depilación láser y masajes. A domicilio o en mi espacio, porque vos merecés lo mejor.</p>
+    <div class="hero-btns">
+      <a href="#hair" class="btn-primary">Ver servicios</a>
+      <a href="#contacto" class="btn-outline">Agendá tu turno</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Hair flyer image as hero -->
+    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=900&q=80" alt="Peluquería profesional" />
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <p class="quote">"Cuando tu pelo cae perfecto… vos brillás más."</p>
+      <p class="author">— Andrea Ruiz</p>
+    </div>
+  </div>
+</section>
+
+<!-- HAIR SERVICES -->
+<section class="services-hair" id="hair">
+  <div>
+    <p class="section-label">Servicios de Cabello</p>
+    <h2 class="section-title">Manos expertas,<br><em>resultados que enamoran.</em></h2>
+    <p>Tratamientos profesionales a domicilio o en mi espacio. Usamos productos de primera calidad para que tu cabello luzca espectacular.</p>
+    <div class="hair-cards reveal">
+      <div class="hair-card">
+        <div class="icon">✦</div>
+        <h3>Alisado con formol</h3>
+        <p>Resultado duradero, cabello liso y brilloso por semanas.</p>
+      </div>
+      <div class="hair-card">
+        <div class="icon">✦</div>
+        <h3>Alisado sin formol</h3>
+        <p>Para pieles sensibles y embarazadas. Igual de efectivo.</p>
+      </div>
+      <div class="hair-card">
+        <div class="icon">✦</div>
+        <h3>Shock de keratina</h3>
+        <p>Nutrición intensiva, suavidad y control del frizz.</p>
+      </div>
+      <div class="hair-card">
+        <div class="icon">✦</div>
+        <h3>Nutrición profunda</h3>
+        <p>Hidratación extrema para cabellos dañados o secos.</p>
+      </div>
+    </div>
+    <br>
+    <a href="#contacto" class="btn-primary" style="margin-top:1.5rem">Reservar turno</a>
+  </div>
+  <div class="hair-visual reveal">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80" alt="Cabello hermoso" />
+  </div>
+</section>
+
+<!-- DEPILACIÓN -->
+<section class="depilacion" id="depilacion">
+  <div class="depilacion-inner">
+    <div class="reveal">
+      <p class="section-label">Depilación Láser</p>
+      <h2 class="section-title">Piel suave,<br><em>sin límites.</em></h2>
+      <div class="flourish"></div>
+      <div class="price-table">
+        <div class="price-group">
+          <p class="price-group-title">Mujeres</p>
+          <div class="price-row">
+            <span>3 zonas o más – cada zona</span>
+            <span>$10.000</span>
+          </div>
+          <div class="price-row">
+            <span>1 o 2 zonas – cada zona</span>
+            <span>$12.000</span>
+          </div>
+        </div>
+        <div class="price-group">
+          <p class="price-group-title">Hombres</p>
+          <div class="price-row">
+            <span>3 zonas o más – cada zona</span>
+            <span>$15.000</span>
+          </div>
+          <div class="price-row">
+            <span>1 o 2 zonas – cada zona</span>
+            <span>$17.000</span>
+          </div>
+        </div>
+      </div>
+      <a href="#contacto" class="btn-primary">Pedir turno</a>
+    </div>
+    <div class="depilacion-right reveal">
+      <div class="dep-imgs">
+        <div class="dep-img">
+          <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=500&q=80" alt="Depilación láser mujer" />
+        </div>
+        <div class="dep-img">
+          <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=500&q=80" alt="Depilación profesional" />
+        </div>
+      </div>
+      <div class="dep-note">
+        Tecnología de última generación para resultados permanentes. Apto para todo tipo de piel.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASAJES -->
+<section class="masajes" id="masajes">
+  <div class="masajes-visual reveal">
+    <div class="big">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=80" alt="Masaje relajante" style="border-radius:0"/>
+    </div>
+    <div class="small">
+      <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=400&q=80" alt="Masaje descontracturante" />
+    </div>
+    <div class="small">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&q=80" alt="Drenaje linfático" />
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="section-label">Masajes Terapéuticos</p>
+    <h2 class="section-title">Soltá el estrés.<br><em>Tu momento es ahora.</em></h2>
+    <div class="flourish"></div>
+    <p class="masajes-cta">"Liberá tensiones. Activá tu bienestar."</p>
+    <div class="masajes-list">
+      <div class="masaje-item">
+        <span class="masaje-dot"></span>
+        <span>Masajes Relajantes</span>
+      </div>
+      <div class="masaje-item">
+        <span class="masaje-dot"></span>
+        <span>Masajes Descontracturantes</span>
+      </div>
+      <div class="masaje-item">
+        <span class="masaje-dot"></span>
+        <span>Drenaje Linfático</span>
+      </div>
+    </div>
+    <a href="#contacto" class="btn-primary">Agendá una cita</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about reveal">
+  <!-- SVG logo centered -->
+  <svg class="about-logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="40" r="37" stroke="#c97d5a" stroke-width="1.3"/>
+    <path d="M40 40 C28 24, 10 26, 15 40 C10 54, 28 56, 40 40Z" fill="none" stroke="#c97d5a" stroke-width="1.3"/>
+    <path d="M40 40 C52 24, 70 26, 65 40 C70 54, 52 56, 40 40Z" fill="none" stroke="#e8c4b0" stroke-width="1.3"/>
+    <path d="M40 28 C38 34 38 46 40 52" stroke="#c97d5a" stroke-width="1.3" stroke-linecap="round"/>
+    <circle cx="57" cy="23" r="3.5" fill="#e8c4b0"/>
+    <circle cx="62" cy="18" r="2" fill="#c97d5a"/>
+    <circle cx="53" cy="18" r="2" fill="#c97d5a"/>
+    <!-- crown on top -->
+    <path d="M34 10 L37 15 L40 11 L43 15 L46 10 L46 18 L34 18Z" fill="#c97d5a" opacity=".6"/>
+  </svg>
+  <p class="section-label" style="text-align:center">Sobre Andrea</p>
+  <h2 class="section-title" style="text-align:center">Andrea <em>Ruiz</em></h2>
+  <p>Soy Andrea, cosmetóloga y especialista en bienestar con pasión por hacer que cada persona se sienta su mejor versión. Ofrezco servicios exclusivos, personalizados y a tu medida, ya sea que vengas a mi espacio o prefiero ir a tu hogar.</p>
+  <p>Manos expertas, productos premium y una atención que te va a enamorar desde la primera sesión.</p>
+  <br>
+  <a href="https://www.instagram.com/andrea_ruiz10k" target="_blank" class="insta-link">
+    ✦ &nbsp;@andrea_ruiz10k en Instagram
+  </a>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <p class="section-label">Contacto</p>
+  <h2 class="section-title">¿Lista para <em>brillar?</em></h2>
+  <p>Agendá tu turno y viví la experiencia Andrea Ruiz. Te espero con cariño para transformar tu look y tu bienestar.</p>
+  <div class="contact-cards reveal">
+    <div class="contact-card">
+      <div class="icon">📲</div>
+      <h4>WhatsApp</h4>
+      <p>Escribime para agendar tu turno</p>
+    </div>
+    <div class="contact-card">
+      <div class="icon">📍</div>
+      <h4>Ubicación</h4>
+      <p>A domicilio o en mi espacio</p>
+    </div>
+    <div class="contact-card">
+      <div class="icon">📸</div>
+      <h4>Instagram</h4>
+      <p>@andrea_ruiz10k</p>
+    </div>
+  </div>
+  <a href="https://wa.me/+5491131363230" target="_blank" class="btn-primary">Escribime por WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Andrea Ruiz· Todos los derechos reservados.</p>
+  <p><a href="https://www.instagram.com/andrea_ruiz10k" target="_blank">@andrea_ruiz10k</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
